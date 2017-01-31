@@ -1,15 +1,13 @@
 java_library(
-  name = "main",
-  srcs = glob(["src/main/java/**/*.java"]),
-  deps = [
-    "//core:main",
-    "//lib:spark-core",
-    "//lib:slf4j-simple",
+    name="main",
+    srcs=glob(["src/main/java/**/*.java"]),
+    deps=[
+        "//core:main",
+        "//lib:spark-core",
+        "//lib:slf4j-simple",
 
-  ],
-  visibility = [
-    "PUBLIC"
-  ]
+    ],
+    visibility=[
+        "PUBLIC"
+    ]
 )
-
-
