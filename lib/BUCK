@@ -1,0 +1,36 @@
+def maven(name, group, version, sha1, deps=[]):
+    prebuilt_jar(
+        name = name,
+        binary_jar = ":%s-mvn" % name,
+        deps = deps,
+        visibility = ["PUBLIC"]
+    )
+
+    remote_file(
+        name = "%s-mvn" % name,
+        out = "%s-mvn.jar" % name,
+        url = "mvn:%s:%s:jar:%s" % (group, name, version),
+        sha1 = sha1,
+    )
+
+
+maven("spark-core", "com.sparkjava", "2.5.4", "6c0f6599a31a6411d372dc995c4ea8563df7c9d1", deps=[
+    ":jetty-http",
+    ":jetty-io",
+    ":jetty-util",
+    ":jetty-server",
+    ":jetty-webapp",
+    ":javax.servlet-api",
+    ":websocket-server",
+])
+maven("slf4j-simple", "org.slf4j", "1.7.21", "be4b3c560a37e69b6c58278116740db28832232c", deps=[
+    ":slf4j-api"
+])
+maven("slf4j-api", "org.slf4j", "1.7.21", "139535a69a4239db087de9bab0bee568bf8e0b70")
+maven("jetty-http", "org.eclipse.jetty", "9.3.6.v20151106", "c2bba60bc1f9fe5779ac20ab30232bf9a89d3e52")
+maven("jetty-io", "org.eclipse.jetty", "9.3.6.v20151106", "09e59bde867e55d8c93cdd682d12317733ef5339")
+maven("jetty-util", "org.eclipse.jetty", "9.3.6.v20151106", "8721c8e670c11ea19005c567733453956b6243fc")
+maven("jetty-server", "org.eclipse.jetty", "9.3.6.v20151106", "d9c43a1b20ede7e3c456237d71b4cce1dff5457a")
+maven("jetty-webapp", "org.eclipse.jetty", "9.3.6.v20151106", "9cf00a3b7b2c1b6e024bb687e3719e1b0ff9e899",)
+maven("javax.servlet-api", "javax.servlet", "3.1.0", "3cd63d075497751784b2fa84be59432f4905bf7c")
+maven("websocket-server", "org.eclipse.jetty.websocket", "9.3.6.v20151106", "e9ab4e7d2c7094564fc311a3cfdf4be601fc58b3",)
